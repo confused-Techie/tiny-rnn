@@ -1,26 +1,38 @@
+const fs = require("fs");
+
+const data = require("./data.js");
+const utils = require("./utils.js");
 
 // Create our dataset
-const dataset = [
-  { inputs: [0,0], outputs: [0] },
-  { inputs: [0,1], outputs: [0] },
-  { inputs: [1,0], outputs: [0] },
-  { inputs: [1,1], outputs: [1] }
-]; // Simple AND Gate Dataset
+
+/**
+ * andGate:
+ *  - inputs: 2
+ * magicButton:
+ *  - inputs: 4
+ */
+
+let dataset = data.findBadText;
+
+//console.log(dataset.data);
 
 const NeuronManager = require("./neuron-manager.js");
 
 const nn = new NeuronManager({
-  inputs: 2,
-  hiddens: 2,
+  inputs: 78,
+  hiddens: 50,
   outputs: 1,
-  dataset: dataset
+  dataset: dataset.data
 });
 
 // Train the Network (10,000 Iterations)
-nn.train(500000);
+nn.train(10000);
+
+fs.writeFileSync("./neural-network/find-bad-text.checkpoint", JSON.stringify(nn.save(), null, 2));
 
 // Test the Network
-console.log(`In: [0,0]: ${nn.activate([0,0])}`);
-console.log(`In: [0,1]: ${nn.activate([0,1])}`);
-console.log(`In: [1,0]: ${nn.activate([1,0])}`);
-console.log(`In: [1,1]: ${nn.activate([1,1])}`);
+
+for (let i = 0; i < dataset.test.length; i++) {
+  //console.log(`In: ${dataset.test[i].input}; Expected: ${dataset.test[i].expected}; Got: ${nn.activate(dataset.test[i].input)}`);
+  console.log(`In: ${utils.flatAlphabetDecode(dataset.test[i].input)}; Expected: ${dataset.test[i].expected}; Got: ${nn.activate(dataset.test[i].input)}`);
+}

@@ -77,6 +77,28 @@ class Neuron {
     // f'(x) = f(x) * (1 - f(x))
   }
 
+  save() {
+    // Used to save the neuron
+    return {
+      id: this.id,
+      bias: this.bias,
+      incoming: {
+        //targets: {...this.incoming.targets.map(a => a.id) },
+        //targets: {...Object.keys(this.incoming.targets).reduce((total, target, index) => { return this.incoming.targets[target].id })},
+        weights: this.incoming.weights
+      },
+      outgoing: {
+        //targets: {...this.incoming.targets.map(a => a.id) },
+        //targets: {...Object.keys(this.outgoing.targets).reduce((total, target, index) => { return this.outgoing.targets[target].id })},
+        weights: this.outgoing.weights
+      },
+      _output: this._output,
+      output: this.output,
+      error: this.error,
+      _error: this._error
+    };
+  }
+
 }
 
 module.exports = Neuron;

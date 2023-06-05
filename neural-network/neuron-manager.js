@@ -72,6 +72,33 @@ class NeuronManager {
     }
   }
 
+  save() {
+    let tmp = {
+      inputCount: this.inputCount,
+      hiddenCount: this.hiddenCount,
+      outputCount: this.outputCount,
+      dataset: this.dataset,
+      inputs: {},
+      hiddens: {},
+      outputs: {}
+    };
+
+    // then lets call the save func of each input, hidden, and output
+    for (let i = 0; i < this.inputCount; i++) {
+      tmp.inputs[this.inputs[i].id] = this.inputs[i].save();
+    }
+
+    for (let i = 0; i < this.hiddenCount; i++) {
+      tmp.hiddens[this.hiddens[i].id] = this.hiddens[i].save();
+    }
+
+    for (let i = 0; i < this.outputCount; i++) {
+      tmp.outputs[this.outputs[i].id] = this.outputs[i].save();
+    }
+
+    return tmp;
+  }
+
 }
 
 module.exports = NeuronManager;
