@@ -7,3 +7,5 @@ https://github.com/karpathy/char-rnn
 http://karpathy.github.io/2015/05/21/rnn-effectiveness/
 
 https://machinelearningmastery.com/what-are-large-language-models/
+
+https://towardsdatascience.com/how-to-train-neural-networks-like-a-pro-1d2362768c1
